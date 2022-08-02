@@ -33,11 +33,11 @@ def translate_type(resolved_type):
 
     # Another model
     if resolved_type.container == ContainerType.MODEL:
-        return "*" + resolved_type.type
+        return f"*{resolved_type.type}"
 
     # Primitive type
     if resolved_type.container == ContainerType.PRIMITIVE:
-        return "*" + PRIMITIVE_TYPES[resolved_type.type]
+        return f"*{PRIMITIVE_TYPES[resolved_type.type]}"
 
     # Composite type
     item_type = translate_item_type(resolved_type.type)

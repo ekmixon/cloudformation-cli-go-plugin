@@ -39,7 +39,7 @@ def check_version(current_version):
         current_version = semver.VersionInfo.parse(current_version)
 
     return [
-        f"Change message for Go plugin v{version}:" + WARNINGS[version]
+        f"Change message for Go plugin v{version}:{WARNINGS[version]}"
         for version in sorted(WARNINGS.keys())
         if current_version is None or current_version < version
     ]

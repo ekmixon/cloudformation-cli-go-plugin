@@ -33,9 +33,7 @@ LANGUAGE_KEYWORDS = {
 
 
 def safe_reserved(string):
-    if string in LANGUAGE_KEYWORDS:
-        return string + "_"
-    return string
+    return f"{string}_" if string in LANGUAGE_KEYWORDS else string
 
 
 def validate_path(default):

@@ -15,9 +15,10 @@ def read(*parts):
 # https://packaging.python.org/guides/single-sourcing-package-version/
 def find_version(*file_paths):
     version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
-    if version_match:
-        return version_match.group(1)
+    if version_match := re.search(
+        r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M
+    ):
+        return version_match[1]
     raise RuntimeError("Unable to find version string.")
 
 

@@ -162,16 +162,13 @@ class GoLanguagePlugin(LanguagePlugin):
 
         # project folder structure
         src = root / "resource"
-        format_paths = []
-
         LOG.debug("Writing Types")
         models = resolve_models(project.schema)
         template = self.env.get_template("types.go.tple")
-        path = src / "{}.go".format("model")
+        path = src / 'model.go'
         contents = template.render(models=models)
         project.overwrite(path, contents)
-        format_paths.append(path)
-
+        format_paths = [path]
         path = root / "main.go"
         LOG.debug("Writing project: %s", path)
         template = self.env.get_template("main.go.tple")
@@ -230,7 +227,7 @@ class GoLanguagePlugin(LanguagePlugin):
 
     @staticmethod
     def _find_exe(project):
-        exe_glob = list((project.root / "bin").glob("{}".format("handler")))
+        exe_glob = list((project.root / "bin").glob('handler'))
         if not exe_glob:
             LOG.debug("No Go executable match")
             raise GoExecutableNotFoundError(
@@ -247,8 +244,6 @@ class GoLanguagePlugin(LanguagePlugin):
             raise InternalError("Multiple Go executable match")
 
         return exe_glob[0]
-
-        LOG.debug("Generate complete")
 
     def package(self, project, zip_file):
         LOG.info("Packaging Go project")
